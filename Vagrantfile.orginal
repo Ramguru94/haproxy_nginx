@@ -14,7 +14,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
      master.vm.provision :file do |file|
       file.source = "./scripts/haproxy.cfg"
       file.destination = "/home/vagrant/haproxy.cfg"
-    master.vm.provision "shell", path: "./scripts/load.sh"
+     master.vm.provision "shell", path: "./scripts/load.sh"
     end
   end
 
@@ -26,7 +26,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
      slave1.vm.provision :file do |file|
       file.source = "./scripts/index.html"
       file.destination = "/home/vagrant/index.html"
-    slave1.vm.provision "shell", path: "./scripts/slave.sh"
+#    slave1.vm.provision "shell", path: "./scripts/slave.sh"
+     slave1.vm.provision "ansible_local" do |ansible|
+       ansible.playbook = "main.yml"
+       ansible.verbose = true
+     end
     end
   end
 

@@ -1,0 +1,16 @@
+---
+- name: Update Cache and Install Nginx
+  apt:
+    name: nginx
+    state: latest
+    update_cache: yes
+
+- name: Remove existing html file
+  file:
+    path: /var/www/html/*
+    state: absent
+
+- name: Copy sample html file
+  copy:
+    src: /home/vagrant/index.html
+    dest: /var/www/html/index.html
