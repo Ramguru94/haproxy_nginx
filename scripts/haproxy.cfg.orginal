@@ -11,6 +11,8 @@ frontend haproxy_in
 
 backend haproxy_http
     balance balance_method
+    cookie mycookies insert indirect nocache
+    stick-table type string len 36 size 1m expire 8h
     mode http
     server web1 slave1_ip:80 check
     server web2 slave2_ip:80 check
