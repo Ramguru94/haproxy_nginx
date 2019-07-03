@@ -24,13 +24,14 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
      slave1.vm.network "private_network", ip: "slave1_ip"
      slave1.vm.network "forwarded_port", guest: 22, host: 2223, auto_correct: true
      slave1.vm.provision :file do |file|
-      file.source = "./scripts/index.html"
+      file.source = "./scripts/index1.html"
       file.destination = "/home/vagrant/index.html"
 #    slave1.vm.provision "shell", path: "./scripts/slave.sh"
-     slave1.vm.provision "ansible_local" do |ansible|
-       ansible.playbook = "main.yml"
-       ansible.verbose = true
-     end
+#     slave1.vm.provision "ansible_local" do |ansible|
+#       ansible.playbook = "main.yml"
+#       ansible.install_mode = "pip"
+#       ansible.verbose = true
+#     end
     end
   end
 
@@ -40,7 +41,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
      slave2.vm.network "private_network", ip: "slave2_ip"
      slave2.vm.network "forwarded_port", guest: 22, host: 2224, auto_correct: true
      slave2.vm.provision :file do |file|
-      file.source = "./scripts/index.html"
+      file.source = "./scripts/index2.html"
       file.destination = "/home/vagrant/index.html"
       slave2.vm.provision "shell", path: "./scripts/slave.sh"
      slave2.vm.provision "shell", path: "./scripts/slave.sh"

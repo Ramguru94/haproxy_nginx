@@ -1,2 +1,4 @@
 *.log
 .vagrant
+Vagrantfile
+scripts/haproxy.cfg
